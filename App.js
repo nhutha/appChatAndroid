@@ -1,19 +1,46 @@
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React,{Component} from 'react';
+import { StyleSheet, Text, View, StatusBar } from 'react-native';
+import Authentication from "./components/authentication";
+import Main from "./components/main";
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator, HeaderTitle } from '@react-navigation/stack';
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-    </View>
-  );
+StatusBar.setHidden(true);
+const Stack = createStackNavigator();
+export default class App extends Component {
+  render(){
+    return(
+      <NavigationContainer>
+      <Stack.Navigator initialRouteName="Authentication">
+        <Stack.Screen name="Authentication" component={Authentication}  options={{
+          title: "Authentication",
+          headerStyle : {
+            backgroundColor : "#3EBA77"
+          },
+          headerTintColor : "white",
+          headerTitleStyle : {
+            fontWeight : "bold",
+            textAlign : "center",
+            fontSize : 30
+          },
+          
+        }}/>
+        <Stack.Screen name="Main" component={Main} options={{
+          title: "My Chat App",
+          headerStyle : {
+            backgroundColor : "#3EBA77"
+          },
+          headerTintColor : "white",
+          headerTitleStyle : {
+            fontWeight : "bold",
+            alignItems : "center",
+            justifyContent : "center",
+            fontSize : 30
+          },
+          
+        }}/>
+      </Stack.Navigator>
+    </NavigationContainer>
+    )
+  }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
